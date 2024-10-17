@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         // Nombre del servidor SonarQube configurado en Jenkins
-        SONARQUBE_SERVER = 'SonarQube'
+        SONARQUBE_SERVER = 'sonarqube'
         // Agregar sonar-scanner al PATH
         PATH = "/opt/sonar-scanner/bin:${env.PATH}"
     }
@@ -20,12 +20,12 @@ pipeline {
                 // Configurar el entorno de SonarQube
                 withSonarQubeEnv("${SONARQUBE_SERVER}") {
                     // Ejecutar el análisis con SonarScanner
-                    sh '''
+                    sh 
                         sonar-scanner \
-                        -Dsonar.projectKey=testPipeLine \
+                        -Dsonar.projectKey=pipeline_sonarqube \
                         -Dsonar.sources=vulnerabilities \
                         -Dsonar.php.version=8.0
-                    '''
+                    
                 }
             }
         }
