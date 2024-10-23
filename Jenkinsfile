@@ -28,7 +28,6 @@ pipeline {
                         -Dsonar.projectKey=pipeline_sonarqube \
                         -Dsonar.sources=vulnerabilities \
                         -Dsonar.php.version=8.0
-                        -Dsonar.sources=. \\
                         -Dsonar.host.url=${SONAR_HOST_URL} \\
                         -Dsonar.login=${SONAR_AUTH_TOKEN}
                     
