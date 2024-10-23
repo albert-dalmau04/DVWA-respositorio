@@ -6,7 +6,7 @@ pipeline {
         SONARQUBE_SERVER = 'sonarqube'
         // Agregar sonar-scanner al PATH
         PATH = "/opt/sonar-scanner/bin:${env.PATH}"
-        
+        SONAR_HOST_URL = 'http://10.30.212.9:9000'
     }
 
     stages {
@@ -26,6 +26,7 @@ pipeline {
                         -Dsonar.projectKey=testPipeLine \
                         -Dsonar.sources=vulnerabilities \
                         -Dsonar.php.version=8.0
+        
                     '''
                 }
             }
