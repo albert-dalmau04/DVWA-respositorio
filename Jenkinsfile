@@ -6,9 +6,7 @@ pipeline {
         SONARQUBE_SERVER = 'sonarqube'
         // Agregar sonar-scanner al PATH
         PATH = "/opt/sonar-scanner/bin:${env.PATH}"
-
-        SONAR_HOST_URL = 'http://10.30.212.9:9000'
-        SONAR_AUTH_TOKEN = credentials('squ_1df8e5876ba943101e1b4069e799f5e3e523473b') // ID de la credencial
+        
     }
 
     stages {
@@ -23,15 +21,12 @@ pipeline {
                 // Configurar el entorno de SonarQube
                 withSonarQubeEnv("${SONARQUBE_SERVER}") {
                     // Ejecutar el análisis con SonarScanner
-                    sh 
+                    sh '''
                         sonar-scanner \
-                        -Dsonar.projectKey=pipeline_sonarqube \
+                        -Dsonar.projectKey=testPipeLine \
                         -Dsonar.sources=vulnerabilities \
-                        -Dsonar.php.version=8.0 \
-                        -Dsonar.sources=. \
-                        -Dsonar.host.url=${SONAR_HOST_URL} \
-                        -Dsonar.login=${SONAR_AUTH_TOKEN}
-                    
+                        -Dsonar.php.version=8.0
+                    '''
                 }
             }
         }
