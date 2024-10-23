@@ -6,6 +6,9 @@ pipeline {
         SONARQUBE_SERVER = 'sonarqube'
         // Agregar sonar-scanner al PATH
         PATH = "/opt/sonar-scanner/bin:${env.PATH}"
+
+        SONAR_HOST_URL = 'http://10.30.212.9:9000'
+        SONAR_AUTH_TOKEN = credentials('squ_1df8e5876ba943101e1b4069e799f5e3e523473b') // ID de la credencial
     }
 
     stages {
