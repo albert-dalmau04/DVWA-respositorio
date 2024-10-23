@@ -23,7 +23,7 @@ pipeline {
                     // Ejecutar el análisis con SonarScanner
                     sh '''
                         sonar-scanner \
-                        -Dsonar.projectKey=testPipeLine \
+                        -Dsonar.projectKey=pipeline_sonarqube \
                         -Dsonar.sources=vulnerabilities \
                         -Dsonar.php.version=8.0
         
