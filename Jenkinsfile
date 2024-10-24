@@ -16,25 +16,6 @@ pipeline {
                 checkout scm
             }
         }
-
-        stage('ZAP Scan') {
-            steps {
-                script {
-                    // Iniciar ZAP en un contenedor
-                    def zapContainer = docker.run("zaproxy/zap-stable", "-u zap -p 8080:8080")
-                    
-                    // Ejecutar escaneo de ZAP (ajusta la URL a tu aplicación)
-                    sh "curl 'http://10.30.212.9:8080/JSON/ascan/action/scan/?url=https://github.com/albert-dalmau04/DVWA-respositorio'"
-
-                    // Esperar a que termine el escaneo
-                    sleep(time: 60, unit: 'SECONDS')
-
-                    // Detener el contenedor
-                    sh "docker stop ${zapContainer.id}"
-                }
-            }
-        }
-
         stage('SonarQube Analysis') {
             steps {
                 // Configurar el entorno de SonarQube
@@ -45,11 +26,11 @@ pipeline {
                         -Dsonar.projectKey=pipeline_sonarqube \
                         -Dsonar.sources=vulnerabilities \
                         -Dsonar.php.version=8.0
+        
                     '''
                 }
             }
         }
-
         stage('Quality Gate') {
             steps {
                 // Esperar el resultado del Quality Gate
